@@ -1,0 +1,4 @@
+enum HeapType {
+  MAX,
+  MIN
+}
