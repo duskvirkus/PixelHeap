@@ -13,6 +13,13 @@ class Heap {
     tree = new Pixel[startingSize];
   }
   
+  public void add(Pixel pixel) {
+    if (size() < tree.length) {
+      tree[size()] = pixel;
+    }
+    added++;
+  }
+  
   public void display() {
     int rows = 3;
     int rowHeight = height / rows;
@@ -27,10 +34,10 @@ class Heap {
   
   public String toString() {
     String s = "[";
-    for (int i = 0; i < size(); i++) {
+    for (int i = 0; i < size() - 1; i++) {
       s += tree[i] + ", ";
     }
-    return s += "]";
+    return s += tree[size() - 1] + "]";
   }
   
 }
