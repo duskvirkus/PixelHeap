@@ -1,9 +1,9 @@
 class Heap {
   
-  protected Pixel[] tree;
+  private Pixel[] tree;
   
-  protected int added = 0;
-  protected int removed = 0;
+  private int added = 0;
+  private int removed = 0;
   
   public Heap() {
     this(16);
@@ -18,6 +18,14 @@ class Heap {
       tree[size()] = pixel;
     }
     added++;
+  }
+  
+  private int leftChild(int i) {
+    return 2 * i + 1;
+  }
+  
+  private int rightChild(int i) {
+    return 2 * (i + 1);
   }
   
   public void display() {
