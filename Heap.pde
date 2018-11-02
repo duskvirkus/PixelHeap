@@ -5,7 +5,7 @@ class Heap {
   private int added = 0;
   private int removed = 0;
   
-  protected HeapType heapType = HeapType.MAX;
+  public final HeapType heapType;
   
   public Heap() {
     this(16, HeapType.MAX);

@@ -1,18 +1,16 @@
-Heap h;
+HeapImage hi;
+
+PImage i;
 
 void setup() {
-  size(400, 400);
-  h = new Heap();
-  for (int i = 0; i < 100; i++) {
-    h.add(new Pixel(color(random(255))));
-  }
-  //println(h);
-  for (int i = 0; i < 100; i++) {
-    println(h.poll());
-  }
-  //println(h);
+  size(474, 308);
+  i = loadImage("data/Untitled-Cowboy-Prince.jpg");
+  //i.resize(47, 30);
+  hi = new HeapImage(HeapType.MAX, i);
+  //println(hi);
 }
 
 void draw() {
-  background(51);
+  background(0);
+  image(i, 0, 0);
 }
