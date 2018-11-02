@@ -11,6 +11,10 @@ class Heap {
     this(16, HeapType.MAX);
   }
   
+   public Heap(int startingSize) {
+    this(startingSize, HeapType.MAX);
+  }
+  
   public Heap(HeapType heapType) {
     this(16, heapType);
   }
@@ -26,6 +30,23 @@ class Heap {
     }
     bubbleUp(size());
     added++;
+  }
+  
+  public Pixel peek() {
+    return tree[0];
+  }
+  
+  public Pixel poll() {
+    if (tree[0] == null) {
+      return null;
+    } else {
+      Pixel element = tree[0];
+      tree[0] = tree[size() - 1];
+      tree[size() - 1] = null;
+      removed++;
+      bubbleDown(0);
+      return element;
+    }
   }
   
   private int leftChild(int i) {
@@ -47,6 +68,35 @@ class Heap {
         tree[parent(i)] = tree[i];
         tree[i] = temp;
         bubbleUp(parent(i));
+      }
+    }
+  }
+  
+  private void bubbleDown(int i) {
+    if (leftChild(i) < size()) {
+      if (rightChild(i) < size()) {
+        if (tree[leftChild(i)].compareTo(tree[rightChild(i)]) > 0) {
+          if (heapType == HeapType.MAX && tree[i].compareTo(tree[leftChild(i)]) < 0 || heapType == HeapType.MIN && tree[i].compareTo(tree[leftChild(i)]) > 0) {
+            Pixel temp = tree[leftChild(i)];
+            tree[leftChild(i)] = tree[i];
+            tree[i] = temp;
+            bubbleDown(leftChild(i));
+          }
+        } else {
+          if (heapType == HeapType.MAX && tree[i].compareTo(tree[rightChild(i)]) < 0 || heapType == HeapType.MIN && tree[i].compareTo(tree[rightChild(i)]) > 0) {
+            Pixel temp = tree[rightChild(i)];
+            tree[rightChild(i)] = tree[i];
+            tree[i] = temp;
+            bubbleDown(rightChild(i));
+          }
+        }
+      } else {
+        if (heapType == HeapType.MAX && tree[i].compareTo(tree[leftChild(i)]) < 0 || heapType == HeapType.MIN && tree[i].compareTo(tree[leftChild(i)]) > 0) {
+            Pixel temp = tree[leftChild(i)];
+            tree[leftChild(i)] = tree[i];
+            tree[i] = temp;
+            bubbleDown(leftChild(i));
+          }
       }
     }
   }
