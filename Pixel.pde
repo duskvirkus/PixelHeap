@@ -1,6 +1,6 @@
 class Pixel implements Comparable<Pixel> {
   
-  public color c;
+  protected color c;
   
   public Pixel(color c) {
     this.c = c;
