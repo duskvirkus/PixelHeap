@@ -25,11 +25,20 @@ class Heap {
   }
   
   public void add(Pixel pixel) {
-    if (size() < tree.length) {
-      tree[size()] = pixel;
+    if (size() >= tree.length) {
+      reallocate();
     }
+    tree[size()] = pixel;
     bubbleUp(size());
     added++;
+  }
+  
+  private void reallocate() {
+    Pixel[] newTree = new Pixel[tree.length * 2];
+    for (int i = 0; i < size(); i++) {
+      newTree[i] = tree[i];
+    }
+    tree = newTree;
   }
   
   public Pixel peek() {
@@ -98,14 +107,6 @@ class Heap {
             bubbleDown(leftChild(i));
           }
       }
-    }
-  }
-  
-  public void display() {
-    int rows = 3;
-    int rowHeight = height / rows;
-    for (int i = 0; i < rows; i++) {
-      rect(0, rowHeight * i, width, rowHeight);
     }
   }
   
