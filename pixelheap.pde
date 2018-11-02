@@ -1,22 +1,33 @@
 HeapImage hi;
 
-PImage i1;
-PImage i2;
+PImage[] images = new PImage[25];
 
 void setup() {
-  size(474, 308);
-  i1 = loadImage("data/Untitled-Cowboy-Prince.jpg");
-  i2 = loadImage("data/Untitled-Cowboy-Prince-Flipped.jpg");
-  hi = new HeapImage(HeapType.MAX, i1);
-  hi.add(i2);
+  size(500, 500);
+  loadImages();
+  hi = new HeapImage(HeapType.MAX, images[0]);
+  for (int i = 1; i < images.length; i++) {
+    hi.add(images[i]);
+  }
+  PImage out;
+  for (int i = 0; i < 25; i++) {
+    out = hi.getImage();
+    out.save("exports/bwblob/BWBlob-Processed-" + i + ".jpg");
+  }
 }
 
 void draw() {
   background(0);
-  PImage out = hi.getImage();
-  out.save("exports/Cowboy1.jpg");
-  out = hi.getImage();
-  out.save("exports/Cowboy2.jpg");
-  image(out, 0, 0);
+  text("DONE", width/2, height/2);
   noLoop();
+}
+
+void loadImages() {
+  int i = 0;
+  int j = 1;
+  while (j < 50) {
+    images[i] = loadImage("data/bwblob/BWBlob-" + j + ".jpg");
+    i++;
+    j += 2;
+  }
 }
